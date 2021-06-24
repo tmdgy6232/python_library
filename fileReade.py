@@ -9,6 +9,9 @@ title_list = []
 writer_list = []
 #날짜
 date_list = []
+
+#조회
+view_list = []
 #좋아요
 like_list = []
 
@@ -57,6 +60,12 @@ with open('sourcetext.txt', 'r', encoding='UTF-8') as f:
     for i in splited:
         result = i.split('</td>')[0]
         date_list.append(result)
+    #조회
+    splited = temp.split('class="td_view">')
+    del splited[0:2]
+    for i in splited:
+        result = i.split('</td>')[0]
+        view_list.append(result)
 
     # 좋아요
     splited = temp.split('class="td_likes">')
@@ -71,6 +80,7 @@ dict_data = {
     '제목' : title_list,
     '작성자' : writer_list,
     '날짜' : date_list,
+    '조회' : view_list,
     '좋아요' : like_list
 }
 df = pd.DataFrame(dict_data)
@@ -78,7 +88,9 @@ df.set_index('글번호', inplace=True)
 
 crawler_a = crawler.Cafe_crawler('sourcetext.txt')
 
+crawler_b = crawler.Cafe_crawler('sourcetext.txt')
+
 crawler_a.crawling_page()
 a = crawler_a.make_df()
-print(a)
+#print(crawler_a.filtering(40, high=100))
 
