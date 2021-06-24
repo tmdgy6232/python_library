@@ -1,4 +1,5 @@
 import pandas as pd
+from crawler import crawler
 
 #글번호
 number_list = []
@@ -40,7 +41,7 @@ with open('sourcetext.txt', 'r', encoding='UTF-8') as f:
         else:
             third_splited = second_splited[1].split('</a')
         result = third_splited[0]
-        result = result.strip()
+        result = result.replace('\n', '').replace('\t', '').strip()
         title_list.append((result))
 
     #작성자
@@ -73,5 +74,11 @@ dict_data = {
     '좋아요' : like_list
 }
 df = pd.DataFrame(dict_data)
-print(df)
+df.set_index('글번호', inplace=True)
+
+crawler_a = crawler.Cafe_crawler('sourcetext.txt')
+
+crawler_a.crawling_page()
+a = crawler_a.make_df()
+print(a)
 
