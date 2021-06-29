@@ -23,3 +23,4 @@ def solution(nums):
 
 solution(number_list1)
 solution(number_list2)
+
