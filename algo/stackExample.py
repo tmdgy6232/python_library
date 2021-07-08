@@ -6,13 +6,11 @@ def solution(command, stack, stack_size):
     if 'push' in command:
         x = int(command.split()[1])
         stack_size += 1
-        _stack = [0 for i in range(stack_size+1)]
-        _stack = stack + [x]
-        stack = _stack
+        stack = stack + [x]
+
     elif 'pop' == command:
         if stack:
             print(stack[stack_size-1])
-            _stack = [0 for i in range(stack_size - 1)]
             _stack = stack[:stack_size-1]
             stack = _stack
             stack_size -= 1
