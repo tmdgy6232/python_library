@@ -162,5 +162,4 @@ arr_test = np.load('./npArrayTest1.npz')['arr_0']
 
 arr = np.array((range(12))).reshape(2,2,3)
 arr = np.transpose(arr, (2,1,0))
-print(arr)
-print(arr.shape)
+
