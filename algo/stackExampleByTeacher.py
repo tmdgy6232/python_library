@@ -1,50 +1,70 @@
-n = int(input())
-stack = []
-stack_size = 0
-
-def run_cmd_width_stack(cmd, my_stack):
-    cmd_type = cmd[0]
-    if cmd_type == "push":
-        my_stack.push(int(cmd[1]))
-    elif cmd_type == "pop":
-        my_stack.pop()
-    elif cmd_type == "size":
-        my_stack.size()
-    elif cmd_type == "empty":
-        my_stack.empty()
-    elif cmd_type == "top":
-        my_stack.top()
-
 class Stack:
-    def __init__(self):
-        self.stack = []
+    def __init__(self, n):
+        self.stack = [None for _ in range(n)]
         self.stack_size = 0
 
-    def push(self, x):
-        self.stack.append(int(x))
+
+    def push(self, num):
+        # self.stack.append(int(num))
+        self.stack[self.stack_size] = int(num)
         self.stack_size += 1
 
+
     def pop(self):
-        if self.stack_size > 0:
-            print(stack.pop())
-            self.stack_size-=1
-        else: print(-1)
+        if self.size() > 0:
+            last_val = self.top()
+            self.stack[self.stack_size - 1] = None
+            self.stack_size -= 1
+            return last_val
+        return -1
+    # 2)
+    # last_val = self.top()
+    # if last_val > 0:
+    #     self.stack_size -= 1
+
+    # return last_val
+
     def size(self):
-        print(self.stack_size)
+        return self.stack_size
+
+
     def empty(self):
-        if self.stack_size > 0 :
-            print(0)
-        else:
-            print(1)
+        if self.size() > 0:
+            return 0
+
+        return 1
+
+    # return int(self.stack_size <= 0)
+
     def top(self):
-        if self.stack_size > 0 :
-            print(self.stack[stack_size-1])
-        else:
-            print(-1)
-my_stack = Stack()
+        if self.stack_size > 0:
+            return self.stack[self.stack_size - 1]
+
+        return -1
+
+
+def run_cmd_with_stack(my_stack, cmd):
+    cmd_type = cmd[0]
+
+    if cmd_type == "push":
+        _, num = cmd  # num = cmd[1]
+        my_stack.push(num)
+    elif cmd_type == "pop":
+        print(my_stack.pop())
+    elif cmd_type == "size":
+        print(my_stack.size())
+    elif cmd_type == "empty":
+        print(my_stack.empty())
+    elif cmd_type == "top":
+        print(my_stack.top())
+    return my_stack
+
+n = int(input())
+my_stack = Stack(n)
 for _ in range(n):
     # "push 2".split() => ["push", "2"]
-    #   "size".split() => ["size"]
-    
+    # "size".split() => ["size"]
     command = input().split()
-    stack, stack_size = run_cmd_width_stack(command, my_stack)
+    my_stack = run_cmd_with_stack(my_stack, command)
+print(my_stack.stack)
+print(f"stack_size: {my_stack.stack_size}")
