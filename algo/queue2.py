@@ -1,30 +1,33 @@
 class Queue:
-    def __init__(self):
-        self.queue = []
+    def __init__(self, n):
+        self.queue = [None for _ in range(n)]
+        self.queuesize = 0
     def push(self, num):
         self.queue.insert(0 , num)
+        self.queuesize += 1
     def front(self):
-        if len(self.queue) > 0:
-            print(self.queue[-1])
+        if self.queuesize > 0:
+            print(self.queue[self.queuesize-1])
         else: print(-1)
     def back(self):
-        if len(self.queue) > 0:
+        if self.queuesize > 0 :
             print(self.queue[0])
         else:
             print(-1)
     def pop(self):
-        if len(self.queue) > 0:
-            print(self.queue[-1])
-            del self.queue[-1]
+        if self.queuesize > 0:
+            print(self.queue[self.queuesize-1])
+            self.queue[self.queuesize-1] = None
+            self.queuesize -= 1
         else:
             print(-1)
     def empty(self):
-        if len(self.queue) > 0:
+        if self.queuesize > 0:
             print(0)
         else:
-            print(-1)
+            print(1)
     def size(self):
-        print(len(self.queue))
+        print(self.queuesize)
 
 
 def run_cmd_with_queue(queue, command):
@@ -47,7 +50,7 @@ def run_cmd_with_queue(queue, command):
     return queue
 
 n = int(input())
-my_queue = Queue()
+my_queue = Queue(n)
 for _ in range(n):
     # "push 2".split() => ["push", "2"]
     # "size".split() => ["size"]
