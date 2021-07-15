@@ -49,7 +49,5 @@ def run_cmd_with_queue(queue, command):
 n = int(input())
 my_queue = Queue()
 for _ in range(n):
-    # "push 2".split() => ["push", "2"]
-    # "size".split() => ["size"]
     command = input().split()
     my_queue = run_cmd_with_queue(my_queue, command)
