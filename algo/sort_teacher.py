@@ -26,21 +26,27 @@ def selection_sort(num_list):
     bef_s_list = num_list.copy()
 
     for i in range(len(bef_s_list)):
-        # min_idx = i
-        # for j in range(i, len(bef_s_list)):
-        #     if bef_s_list[j] < bef_s_list[min_idx]:
-        #         min_idx = j
-        min_val = min(bef_s_list[i:])
-        min_idx = bef_s_list.index(min_val)
+        min_idx = i
+        for j in range(i, len(bef_s_list)):
+            if bef_s_list[j] < bef_s_list[min_idx]:
+                min_idx = j
 
-        min_idx = np.argmin(bef_s_list)
+        #2)
+        # min_val = min(bef_s_list[i:])
+        # min_idx = bef_s_list.index(min_val)
+        # min_idx = np.argmin(bef_s_list)
 
-    bef_s_list[0], bef_s_list[min_idx] = bef_s_list[min_idx], bef_s_list[0]
+            bef_s_list[0], bef_s_list[min_idx] = bef_s_list[min_idx], bef_s_list[0]
 
-    return []
+    return bef_s_list
 
-def bubble_sort():
-    return []
+def bubble_sort(num_list):
+    bef_s_list = num_list.copy()
+    for i in range(len(bef_s_list)):
+        for j in range(len(bef_s_list)-i-1):
+            if bef_s_list[j] > bef_s_list[j+1]:
+                bef_s_list[j], bef_s_list[j+1] = bef_s_list[j+1], bef_s_list[j]
+    return bef_s_list
 
 n = int(input())
 num_list = []
@@ -49,11 +55,11 @@ for _ in range(n):
     num = int(input())
     num_list.append(num)
 
-insertion_sorted_list = insertion_sort(num_list)
-print(" ".join(map(str, insertion_sorted_list)))
+# insertion_sorted_list = insertion_sort(num_list)
+# print(" ".join(map(str, insertion_sorted_list)))
 
-selection_sorted_list = selection_sort()
-print(" ".join(map(str, selection_sorted_list)))
+# selection_sorted_list = selection_sort(num_list)
+# print(" ".join(map(str, selection_sorted_list)))
 
-bubble_sorted_list = bubble_sort()
+bubble_sorted_list = bubble_sort(num_list)
 print(" ".join(map(str, bubble_sorted_list)))
