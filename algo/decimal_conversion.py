@@ -4,6 +4,7 @@ b = int(b)
 
 
 #1)
+#print(int(num_str, int(b)))
 
 #2)
 decimal_result = 0
